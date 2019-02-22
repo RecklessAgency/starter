@@ -43,6 +43,8 @@ The following Twig extensions are provided:
  - `place_webform(string $webform_name)`: Renders the passed webform.
  - `place_node(int $node_id, string $display_type)`: Renders the passed node identifier and display type.
  - `place_view(string $view_name, int $display_id)`: Renders the passed view name and display identifier.
+ - `place_paragraphs(string $field_name, obj $node = null)`: Returns a rendered 'Paragraphs' field. The node will be automatically grabbed from the current route unless you specify otherwise.
+ - `place_responsive_image(ImageItem $image, string $image_style)`: Returns the render responsive image.
  - `place_menu(string $menu_name, int $min_depth, int $max_depth, string $theme)`: Renders the passed menu, with an optional min and max depth, as well as a theme (Twig template).
  - `get_taxonomy_terms(string $taxonomy_name, array $extra_fields)`: Returns an array of taxonomy terms from a taxonomy vocabulary name. You may also pass an array of the names of extra fields to pull through.
  - `get_active_theme()`: Returns the active theme name.
@@ -51,7 +53,7 @@ The following Twig extensions are provided:
  - `get_current_path()`: Returns the current path.
  - `get_theme_setting(string $theme_setting)`: Returns a theme setting's value.
  - `get_variable(string $variable)`: Returns a $_GET variable.
- - `place_paragraphs(string $field_name, obj $node = null)`: Returns a rendered 'Paragraphs' field. The node will be automatically grabbed from the current route unless you specify otherwise.
+
  - `dd($data, bool $exit = true)`: Dumps out `$data` and exits the script, unless a second parameter of false is passed.
  - `set_meta({key: value, key: value}[, id])`: Sets meta tags, pass a second parameter to replace an already existing meta tag.
  - `get_node_path($nid)`: Returns the path of a given node ID.
@@ -64,6 +66,6 @@ The following Twig filters are provided:
  - `unescape`: decodes html entities in the passed string.
 
 ## Install
-Use composer: `composer require brynj-digital/starter`
+Use composer: `composer require reckless/starter`
 
 **Note:** Drupal Composer Project (https://github.com/drupal-composer/drupal-project) should be used.

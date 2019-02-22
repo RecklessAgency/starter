@@ -1,17 +1,17 @@
 {
-  "name": "brynj-digital/starter",
+  "name": "reckless/starter",
   "type": "drupal-module",
   "description": "A utility module for Drupal 8, adding useful generic functionality",
   "keywords": [
     "drupal",
     "drupal-8"
   ],
-  "homepage": "https://github.com/brynj-digital/starter",
+  "homepage": "https://github.com/RecklessAgency/starter",
   "license": "GPL-2.0+",
   "authors": [
     {
-      "name": "Bryn Jones",
-      "email": "bryn.jones@reckless.agency",
+      "name": "Reckless Agency",
+      "email": "dev@reckless.agency",
       "role": "Developer"
     }
   ],

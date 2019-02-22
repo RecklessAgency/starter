@@ -75,6 +75,14 @@ class TwigExtension extends \Twig_Extension {
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
+      new \Twig_SimpleFunction('place_paragraphs', [$this, 'place_paragraphs'], [
+        'needs_environment' => FALSE,
+        'needs_context' => FALSE,
+      ]),
+      new \Twig_SimpleFunction('place_responsive_image', [$this, 'place_responsive_image'], [
+        'needs_environment' => FALSE,
+        'needs_context' => FALSE,
+      ]),
       new \Twig_SimpleFunction('get_theme_url', [$this, 'get_theme_url'], [
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
@@ -104,10 +112,6 @@ class TwigExtension extends \Twig_Extension {
         'needs_context' => FALSE,
       ]),
       new \Twig_SimpleFunction('get_variable', [$this, 'get_variable'], [
-        'needs_environment' => FALSE,
-        'needs_context' => FALSE,
-      ]),
-      new \Twig_SimpleFunction('place_paragraphs', [$this, 'place_paragraphs'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
@@ -642,6 +646,46 @@ class TwigExtension extends \Twig_Extension {
     $drupal->render($html_head);
 
     return TRUE;
+  }
+
+  /**
+   * Place a responsive image.
+   * Credits: https://gist.github.com/szeidler/3526f21a89f93a318e5d
+   */
+  public function place_responsive_image($image, $image_style) {
+    $file = $image->entity;
+
+    if ($file) {
+      $variables = [
+        'responsive_image_style_id' => $image_style,
+        'uri' => $file->getFileUri(),
+      ];
+
+      // The image.factory service will check if our image is valid.
+      $image = \Drupal::service('image.factory')->get($file->getFileUri());
+      if ($image->isValid()) {
+        $variables['width'] = $image->getWidth();
+        $variables['height'] = $image->getHeight();
+      }
+      else {
+        $variables['width'] = $variables['height'] = NULL;
+      }
+      $logo_build = [
+        '#theme' => 'responsive_image',
+        '#width' => $variables['width'],
+        '#height' => $variables['height'],
+        '#responsive_image_style_id' => $variables['responsive_image_style_id'],
+        '#uri' => $variables['uri'],
+      ];
+      // Add the file entity to the cache dependencies.
+      // This will clear our cache when this entity updates.
+      $renderer = \Drupal::service('renderer');
+      $renderer->addCacheableDependency($logo_build, $file);
+      // Return the render array as block content.
+      return $logo_build;
+    }
+
+    return NULL;
   }
 
 }
