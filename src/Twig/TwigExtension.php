@@ -79,6 +79,10 @@ class TwigExtension extends \Twig_Extension {
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
+      new \Twig_SimpleFunction('place_entity', [$this, 'place_entity'], [
+        'needs_environment' => FALSE,
+        'needs_context' => FALSE,
+      ]),
       new \Twig_SimpleFunction('place_responsive_image', [$this, 'place_responsive_image'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
@@ -550,6 +554,17 @@ class TwigExtension extends \Twig_Extension {
         return $elements;
       }
     }
+  }
+
+  /**
+   * Render an entity.
+   */
+  public function place_entity($entity, $view_mode = 'full') {
+    // View is the render array.
+    $view = entity_view($entity, $view_mode);
+
+    // Render is the html output.
+    return render($view);
   }
 
   /**
