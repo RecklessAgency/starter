@@ -54,7 +54,7 @@ The following Twig extensions are provided:
  - `get_current_path()`: Returns the current path.
  - `get_theme_setting(string $theme_setting)`: Returns a theme setting's value.
  - `get_variable(string $variable)`: Returns a $_GET variable.
-
+ - `get_config(string $config)`: Returns a config.
  - `dd($data, bool $exit = true)`: Dumps out `$data` and exits the script, unless a second parameter of false is passed.
  - `set_meta({key: value, key: value}[, id])`: Sets meta tags, pass a second parameter to replace an already existing meta tag.
  - `get_node_path($nid)`: Returns the path of a given node ID.
