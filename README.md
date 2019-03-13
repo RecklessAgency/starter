@@ -44,6 +44,7 @@ The following Twig extensions are provided:
  - `place_node(int $node_id, string $display_type)`: Renders the passed node identifier and display type.
  - `place_view(string $view_name, int $display_id)`: Renders the passed view name and display identifier.
  - `place_paragraphs(string $field_name, obj $node = null)`: Returns a rendered 'Paragraphs' field. The node will be automatically grabbed from the current route unless you specify otherwise.
+ - `place_entity(string $entity, striong $view_mode = 'full')`: Returns the rendered entity.
  - `place_responsive_image(ImageItem $image, string $image_style)`: Returns the render responsive image.
  - `place_menu(string $menu_name, int $min_depth, int $max_depth, string $theme)`: Renders the passed menu, with an optional min and max depth, as well as a theme (Twig template).
  - `get_taxonomy_terms(string $taxonomy_name, array $extra_fields)`: Returns an array of taxonomy terms from a taxonomy vocabulary name. You may also pass an array of the names of extra fields to pull through.
