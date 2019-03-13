@@ -119,6 +119,10 @@ class TwigExtension extends \Twig_Extension {
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
+      new \Twig_SimpleFunction('get_config', [$this, 'get_config'], [
+        'needs_environment' => FALSE,
+        'needs_context' => FALSE,
+      ]),
       new \Twig_SimpleFunction('dd', [$this, 'dd'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
@@ -508,6 +512,13 @@ class TwigExtension extends \Twig_Extension {
    */
   public function get_variable($variable) {
     return \Drupal::request()->get($variable);
+  }
+
+  /**
+   * Return a config.
+   */
+  public function get_config($config) {
+    return \Drupal::config($config);
   }
 
   /**
