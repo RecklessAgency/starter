@@ -151,6 +151,10 @@ class TwigExtension extends \Twig_Extension {
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
+      new \Twig_SimpleFunction('get_current_lang', [$this, 'get_current_lang'], [
+        'needs_environment' => FALSE,
+        'needs_context' => FALSE,
+      ]),
     ];
   }
 
@@ -712,6 +716,13 @@ class TwigExtension extends \Twig_Extension {
     }
 
     return NULL;
+  }
+
+  /**
+   * Returns the current language ID.
+   */
+  public function get_current_lang() {
+    return \Drupal::languageManager()->getCurrentLanguage()->getId();
   }
 
 }

@@ -58,6 +58,7 @@ The following Twig extensions are provided:
  - `dd($data, bool $exit = true)`: Dumps out `$data` and exits the script, unless a second parameter of false is passed.
  - `set_meta({key: value, key: value}[, id])`: Sets meta tags, pass a second parameter to replace an already existing meta tag.
  - `get_node_path($nid)`: Returns the path of a given node ID.
+ - `get_current_lang()`: Returns the current language code.
 
 ### Twig filters
 The following Twig filters are provided:
