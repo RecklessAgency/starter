@@ -241,18 +241,19 @@ class TwigExtension extends \Twig_Extension {
    */
   public function place_block(\Twig_Environment $env, array $context, $block_name) {
     $render = FALSE;
-    // Try to load as plugin block.
-    $plugin_block = \Drupal::service('plugin.manager.block')->createInstance($block_name, $config = []);
-    if (!empty($plugin_block) && $plugin_block->getPluginId() != 'broken') {
-      $render = $plugin_block->build();
-    }
+
     // Get as entity block.
-    else {
-      $block = Block::load($block_name);
-      if (!empty($block)) {
-        $render = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block);
+    $block = Block::load($block_name);
+    if (!empty($block)) {
+      $render = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block);
+    } else {
+      // Try to load as plugin block.
+      $plugin_block = \Drupal::service('plugin.manager.block')->createInstance($block_name, $config = []);
+      if (!empty($plugin_block) && $plugin_block->getPluginId() != 'broken') {
+        $render = $plugin_block->build();
       }
     }
+
     return $render;
   }
 
