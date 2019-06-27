@@ -383,8 +383,8 @@ class TwigExtension extends \Twig_Extension {
     $i = 0;
     foreach ($taxonomy_terms as $term) {
       $taxonomy_array[$i] = [
-        'tid' => $term->get('tid')->value,
-        'name' => $term->get('name')->value,
+        'tid' => $term->hasTranslation($this->get_current_lang()) ? $term->getTranslation($this->get_current_lang())->get('tid')->value : $term->getTranslation('en')->get('tid')->value,
+        'name' => $term->hasTranslation($this->get_current_lang()) ? $term->getTranslation($this->get_current_lang())->get('name')->value : $term->getTranslation('en')->get('name')->value,
       ];
 
       // Add extra fields if supplied.
