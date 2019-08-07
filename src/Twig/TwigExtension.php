@@ -123,6 +123,10 @@ class TwigExtension extends \Twig_Extension {
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
+      new \Twig_SimpleFunction('get_rendered_string', [$this, 'get_rendered_string'], [
+        'needs_environment' => FALSE,
+        'needs_context' => FALSE,
+      ]),
       new \Twig_SimpleFunction('dd', [$this, 'dd'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
@@ -726,4 +730,11 @@ class TwigExtension extends \Twig_Extension {
     return \Drupal::languageManager()->getCurrentLanguage()->getId();
   }
 
+  /**
+   * Returns a string (mark up) of the passed render array
+   */
+  function get_rendered_string($render_array) {
+    $renderer = \Drupal::service('renderer');
+    return (string) $renderer->renderRoot($render_array);
+  }
 }
