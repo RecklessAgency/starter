@@ -59,6 +59,8 @@ The following Twig extensions are provided:
  - `set_meta({key: value, key: value}[, id])`: Sets meta tags, pass a second parameter to replace an already existing meta tag.
  - `get_node_path($nid)`: Returns the path of a given node ID.
  - `get_current_lang()`: Returns the current language code.
+ - `get_rendered_string($render_array)`: Returns a string containing markup for the passed render array
+ - `get_env($env)`: Wrapper for getenv() function
 
 ### Twig filters
 The following Twig filters are provided:

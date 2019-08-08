@@ -159,6 +159,8 @@ class TwigExtension extends \Twig_Extension {
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
+      // twig wrapper for getenv function
+      new \Twig_SimpleFunction('get_env', 'getenv'),
     ];
   }
 
