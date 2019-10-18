@@ -70,6 +70,11 @@ class TwigExtension extends \Twig_Extension {
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
+      new \Twig_SimpleFunction('place_term', [$this, 'place_term'], [
+        'is_safe' => ['html'],
+        'needs_environment' => TRUE,
+        'needs_context' => TRUE,
+      ]),
       new \Twig_SimpleFunction('place_view', [$this, 'place_view'], [
         'is_safe' => ['html'],
         'needs_environment' => FALSE,
@@ -276,7 +281,7 @@ class TwigExtension extends \Twig_Extension {
   }
 
   /**
-   *
+   * Place a node.
    */
   public function place_node(\Twig_Environment $env, array $context, $node_id, $node_view = 'full') {
     $node = entity_load('node', $node_id);
@@ -285,6 +290,18 @@ class TwigExtension extends \Twig_Extension {
     }
     else {
       return node_view($node, $node_view);
+    }
+  }
+
+  /**
+   * Place a taxonomy term.
+   */
+  public function place_term(\Twig_Environment $env, array $context, $term, $term_view = 'full') {
+    if (empty($term)) {
+      return '';
+    }
+    else {
+      return entity_view($term, $term_view);
     }
   }
 
