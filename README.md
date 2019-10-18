@@ -42,6 +42,7 @@ The following Twig extensions are provided:
  - `place_form(string $form_name)`: Renders the passed form class name.
  - `place_webform(string $webform_name)`: Renders the passed webform.
  - `place_node(int $node_id, string $display_type)`: Renders the passed node identifier and display type.
+ - `place_term(Taxonomy_term $term, string $display_type)`: Renders the passed taxonomy term and display type.
  - `place_view(string $view_name, int $display_id)`: Renders the passed view name and display identifier.
  - `place_paragraphs(string $field_name, obj $node = null)`: Returns a rendered 'Paragraphs' field. The node will be automatically grabbed from the current route unless you specify otherwise.
  - `place_entity(string $entity, striong $view_mode = 'full')`: Returns the rendered entity.
