@@ -27,6 +27,7 @@ class TwigExtension extends \Twig_Extension {
       'slugify' => new \Twig_Filter_Method($this, 'slugify'),
       'debugstrip' => new \Twig_Filter_Method($this, 'debugstrip'),
       'unescape' => new \Twig_Filter_Method($this, 'unescape'),
+      'ceil' => new \Twig_Filter_Method($this, 'ceil'),
     ];
   }
 
@@ -649,6 +650,15 @@ class TwigExtension extends \Twig_Extension {
    */
   public function unescape($html) {
     return html_entity_decode($html);
+  }
+
+  /**
+   * Rounds a number up to the nearest whole number.
+   *
+   * Returns a integer.
+   */
+  public function ceil($string) {
+    return ceil($string);
   }
 
   /**
