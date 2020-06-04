@@ -24,10 +24,10 @@ class TwigExtension extends \Twig_Extension {
    */
   public function getFilters() {
     return [
-      'slugify' => new \Twig_Filter_Method($this, 'slugify'),
-      'debugstrip' => new \Twig_Filter_Method($this, 'debugstrip'),
-      'unescape' => new \Twig_Filter_Method($this, 'unescape'),
-      'ceil' => new \Twig_Filter_Method($this, 'ceil'),
+      'slugify' => new \Twig\TwigFilter('slugify'),
+      'debugstrip' => new \Twig\TwigFilter('debugstrip'),
+      'unescape' => new \Twig\TwigFilter('unescape'),
+      'ceil' => new \Twig\TwigFilter('ceil'),
     ];
   }
 
@@ -174,7 +174,7 @@ class TwigExtension extends \Twig_Extension {
    * Return a path alias from a node ID.
    */
   public function get_node_path($nid) {
-    return \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $nid);
+    return \Drupal::service('path_alias.manager')->getAliasByPath('/node/' . $nid);
   }
 
   /**
@@ -524,7 +524,7 @@ class TwigExtension extends \Twig_Extension {
    */
   public function get_current_path() {
     $current_path = \Drupal::service('path.current')->getPath();
-    $result = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
+    $result = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
 
     return $result;
   }

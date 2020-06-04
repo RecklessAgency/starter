@@ -43,7 +43,7 @@ class KernelRequestSubscriber implements EventSubscriberInterface {
     // Target anonymous users and master request (important)
     if ($anonymous === TRUE && $event->isMasterRequest()) {
       $current_path = \Drupal::service('path.current')->getPath();
-      $alias = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
+      $alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
       $alias_parts = explode('/', trim($alias, '/'));
       // This content should not be viewed directly.
       if (!empty($alias_parts) && $alias_parts[0] == $this->config->get('paths.disable_access')) {
@@ -63,7 +63,7 @@ class KernelRequestSubscriber implements EventSubscriberInterface {
 
     // Redirect any pages with aliases to the alias.
     $current_uri = \Drupal::request()->getRequestUri();
-    $alias_uri = \Drupal::service('path.alias_manager')->getAliasByPath($current_uri);
+    $alias_uri = \Drupal::service('path_alias.manager')->getAliasByPath($current_uri);
     if ($current_uri !== $alias_uri) {
       $response = new Response();
       $response->headers->set('Location', $alias_uri);

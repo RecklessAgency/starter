@@ -100,7 +100,7 @@ function starter_entity_prepare_form($entity, $operation, $form_state) {
  */
 function get_path_alias() {
   $current_path = \Drupal::service('path.current')->getPath();
-  $result = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
+  $result = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
 
   $path_alias = trim($result, '/');
   $path_alias = str_replace('-', '_', $path_alias);
