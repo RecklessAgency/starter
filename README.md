@@ -1,5 +1,5 @@
-# Drupal 8 Starter Module
-A utility module for Drupal 8, adding useful generic functionality.
+# Drupal 9 Starter Module
+A utility module for Drupal 9, adding useful generic functionality.
 
 ## Functionality
 
