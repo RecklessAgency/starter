@@ -4,9 +4,9 @@ namespace Drupal\starter\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 /**
  * Subscribe to KernelEvents::REQUEST events and throw a 404 if content should not be accessed directly.
@@ -34,9 +34,10 @@ class KernelRequestSubscriber implements EventSubscriberInterface {
    * Disable all direct access of content set with the special disable_access route alias
    * Also prevent homepage being accessed from anything other than the base path
    * Also redirect any aliased pages to their aliased path
+   *
    * Only applies to anonymous users.
    */
-  public function disableDirectAccess(GetResponseEvent $event) {
+  public function disableDirectAccess(RequestEvent $event) {
 
     $anonymous = \Drupal::currentUser()->isAnonymous();
 

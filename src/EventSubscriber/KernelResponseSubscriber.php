@@ -5,7 +5,7 @@ namespace Drupal\starter\EventSubscriber;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
 /**
  * Class KernelEventSubscriber.
@@ -35,7 +35,7 @@ class KernelResponseSubscriber implements EventSubscriberInterface {
   /**
    * Restricts access on kernel response.
    */
-  public function onKernelResponse(FilterResponseEvent $event) {
+  public function onKernelResponse(ResponseEvent $event) {
 
     if ($event->getRequest()->attributes->get('_route') == 'system.entity_autocomplete') {
 
@@ -45,10 +45,11 @@ class KernelResponseSubscriber implements EventSubscriberInterface {
 
       if ($event->getRequest()->attributes->get('target_type') == 'taxonomy_term' && $this->config->get('term_autocomplete_display_vocabulary')) {
 
-        $vocabularies = entity_load_multiple('taxonomy_vocabulary');
+        $vocabularies = \Drupal::entityTypeManager()
+          ->getStorage('taxonomy_vocabulary')
+          ->loadMultiple();
 
         foreach ($suggested_values as $value) {
-
           $value_parts = explode('(', $value->value);
           $tid = trim(end($value_parts), ' )');
 
@@ -56,7 +57,7 @@ class KernelResponseSubscriber implements EventSubscriberInterface {
 
           $return_values[] = [
             'value' => $value->value,
-            'label' => $value->label . (!empty($term) ? ' [' . $vocabularies[$term->getVocabularyId()]->label() . ']' : ''),
+            'label' => $value->label . (!empty($term) ? ' [' . $vocabularies[$term->vid->target_id]->label() . ']' : ''),
           ];
         }
       }
