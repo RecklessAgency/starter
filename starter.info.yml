@@ -2,4 +2,4 @@ type: module
 name: Starter
 description: 'Starter module providing miscellaneous useful functionality.'
 package: Other
-core: 8.x
+core: 9.x
