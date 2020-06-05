@@ -6,11 +6,14 @@ use Drupal\entity_reference_revisions\Plugin\Field\FieldFormatter\EntityReferenc
 use Drupal\block\Entity\Block;
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
+use Twig\Extension\AbstractExtension;
 
 /**
- *
+ * Provides usual filters and functions for Twig.
  */
-class TwigExtension extends \Twig_Extension {
+class TwigExtension extends AbstractExtension {
 
   /**
    * {@inheritdoc}
@@ -20,14 +23,14 @@ class TwigExtension extends \Twig_Extension {
   }
 
   /**
-   *
+   * {@inheritdoc}
    */
   public function getFilters() {
     return [
-      'slugify' => new \Twig\TwigFilter('slugify'),
-      'debugstrip' => new \Twig\TwigFilter('debugstrip'),
-      'unescape' => new \Twig\TwigFilter('unescape'),
-      'ceil' => new \Twig\TwigFilter('ceil'),
+      'slugify' => new TwigFilter('slugify', 'slugify'),
+      'debugstrip' => new TwigFilter('debugstrip', 'debugstrip'),
+      'unescape' => new TwigFilter('unescape', 'unescape'),
+      'ceil' => new TwigFilter('ceil', 'ceil'),
     ];
   }
 
@@ -36,137 +39,137 @@ class TwigExtension extends \Twig_Extension {
    */
   public function getFunctions() {
     return [
-      new \Twig_SimpleFunction('base_root', [$this, 'base_root'], [
+      new TwigFunction('base_root', [$this, 'base_root'], [
         'is_safe' => ['html'],
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new \Twig_SimpleFunction('display_menu', [$this, 'place_menu'], [
+      new TwigFunction('display_menu', [$this, 'place_menu'], [
         'is_safe' => ['html'],
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
-      new \Twig_SimpleFunction('place_menu', [$this, 'place_menu'], [
+      new TwigFunction('place_menu', [$this, 'place_menu'], [
         'is_safe' => ['html'],
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
-      new \Twig_SimpleFunction('place_block', [$this, 'place_block'], [
+      new TwigFunction('place_block', [$this, 'place_block'], [
         'is_safe' => ['html'],
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
-      new \Twig_SimpleFunction('place_form', [$this, 'place_form'], [
+      new TwigFunction('place_form', [$this, 'place_form'], [
         'is_safe' => ['html'],
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
-      new \Twig_SimpleFunction('place_webform', [$this, 'place_webform'], [
+      new TwigFunction('place_webform', [$this, 'place_webform'], [
         'is_safe' => ['html'],
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new \Twig_SimpleFunction('place_node', [$this, 'place_node'], [
+      new TwigFunction('place_node', [$this, 'place_node'], [
         'is_safe' => ['html'],
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
-      new \Twig_SimpleFunction('place_term', [$this, 'place_term'], [
+      new TwigFunction('place_term', [$this, 'place_term'], [
         'is_safe' => ['html'],
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
-      new \Twig_SimpleFunction('place_view', [$this, 'place_view'], [
+      new TwigFunction('place_view', [$this, 'place_view'], [
         'is_safe' => ['html'],
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new \Twig_SimpleFunction('place_paragraphs', [$this, 'place_paragraphs'], [
+      new TwigFunction('place_paragraphs', [$this, 'place_paragraphs'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new \Twig_SimpleFunction('place_entity', [$this, 'place_entity'], [
+      new TwigFunction('place_entity', [$this, 'place_entity'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new \Twig_SimpleFunction('place_responsive_image', [$this, 'place_responsive_image'], [
+      new TwigFunction('place_responsive_image', [$this, 'place_responsive_image'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new \Twig_SimpleFunction('get_theme_url', [$this, 'get_theme_url'], [
+      new TwigFunction('get_theme_url', [$this, 'get_theme_url'], [
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
-      new \Twig_SimpleFunction('get_taxonomy_terms', [$this, 'get_taxonomy_terms'], [
+      new TwigFunction('get_taxonomy_terms', [$this, 'get_taxonomy_terms'], [
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
-      new \Twig_SimpleFunction('get_active_theme', [$this, 'get_active_theme'], [
+      new TwigFunction('get_active_theme', [$this, 'get_active_theme'], [
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
-      new \Twig_SimpleFunction('get_image_path', [$this, 'get_image_path'], [
+      new TwigFunction('get_image_path', [$this, 'get_image_path'], [
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
-      new \Twig_SimpleFunction('get_path_segment', [$this, 'get_path_segment'], [
+      new TwigFunction('get_path_segment', [$this, 'get_path_segment'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new \Twig_SimpleFunction('get_current_path', [$this, 'get_current_path'], [
+      new TwigFunction('get_current_path', [$this, 'get_current_path'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new \Twig_SimpleFunction('get_theme_setting', [$this, 'get_theme_setting'], [
+      new TwigFunction('get_theme_setting', [$this, 'get_theme_setting'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new \Twig_SimpleFunction('get_variable', [$this, 'get_variable'], [
+      new TwigFunction('get_variable', [$this, 'get_variable'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new \Twig_SimpleFunction('get_config', [$this, 'get_config'], [
+      new TwigFunction('get_config', [$this, 'get_config'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new \Twig_SimpleFunction('get_rendered_string', [$this, 'get_rendered_string'], [
+      new TwigFunction('get_rendered_string', [$this, 'get_rendered_string'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new \Twig_SimpleFunction('dd', [$this, 'dd'], [
+      new TwigFunction('dd', [$this, 'dd'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new \Twig_SimpleFunction('get_first_instance', [$this, 'get_first_instance'], [
+      new TwigFunction('get_first_instance', [$this, 'get_first_instance'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new \Twig_SimpleFunction('safe_merge', [$this, 'safe_merge'], [
+      new TwigFunction('safe_merge', [$this, 'safe_merge'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new \Twig_SimpleFunction('get_node', [$this, 'get_node'], [
+      new TwigFunction('get_node', [$this, 'get_node'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new \Twig_SimpleFunction('set_meta', [$this, 'set_meta'], [
+      new TwigFunction('set_meta', [$this, 'set_meta'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new \Twig_SimpleFunction('get_root', [$this, 'get_root'], [
+      new TwigFunction('get_root', [$this, 'get_root'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new \Twig_SimpleFunction('get_node_path', [$this, 'get_node_path'], [
+      new TwigFunction('get_node_path', [$this, 'get_node_path'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new \Twig_SimpleFunction('get_current_lang', [$this, 'get_current_lang'], [
+      new TwigFunction('get_current_lang', [$this, 'get_current_lang'], [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
       // twig wrapper for getenv function
-      new \Twig_SimpleFunction('get_env', 'getenv'),
+      new TwigFunction('get_env', 'getenv'),
     ];
   }
 
