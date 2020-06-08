@@ -204,7 +204,7 @@ class TwigExtension extends AbstractExtension {
    * @param array $context
    *   An array of parameters passed to the template.
    */
-  public function place_menu(\Twig_Environment $env, array $context, $menu_name, $min_depth = NULL, $max_depth = NULL, $theme = NULL) {
+  public function place_menu(\Twig\Environment $env, array $context, $menu_name, $min_depth = NULL, $max_depth = NULL, $theme = NULL) {
     $menu_tree = \Drupal::menuTree();
 
     // Build the typical default set of menu tree parameters.
@@ -254,7 +254,7 @@ class TwigExtension extends AbstractExtension {
    * @param array $context
    *   An array of parameters passed to the template.
    */
-  public function place_block(\Twig_Environment $env, array $context, $block_name) {
+  public function place_block(\Twig\Environment $env, array $context, $block_name) {
     $render = FALSE;
 
     // Get as entity block.
@@ -280,14 +280,14 @@ class TwigExtension extends AbstractExtension {
    * @param array $context
    *   An array of parameters passed to the template.
    */
-  public function place_form(\Twig_Environment $env, array $context, $form_name) {
+  public function place_form(\Twig\Environment $env, array $context, $form_name) {
     return \Drupal::formBuilder()->getForm($form_name);
   }
 
   /**
    * Place a node.
    */
-  public function place_node(\Twig_Environment $env, array $context, $node_id, $node_view = 'full') {
+  public function place_node(\Twig\Environment $env, array $context, $node_id, $node_view = 'full') {
     $node = entity_load('node', $node_id);
     if (empty($node)) {
       return '';
@@ -300,7 +300,7 @@ class TwigExtension extends AbstractExtension {
   /**
    * Place a taxonomy term.
    */
-  public function place_term(\Twig_Environment $env, array $context, $term, $term_view = 'full') {
+  public function place_term(\Twig\Environment $env, array $context, $term, $term_view = 'full') {
     if (empty($term)) {
       return '';
     }
@@ -396,12 +396,12 @@ class TwigExtension extends AbstractExtension {
   /**
    * Returns an array of taxonomy term names and IDs from a taxonomy vocabulary name.
    */
-  public function get_taxonomy_terms(\Twig_Environment $env, array $context, $taxonomy_name, array $other_fields = NULL) {
+  public function get_taxonomy_terms(\Twig\Environment $env, array $context, $taxonomy_name, array $other_fields = NULL) {
     $query = \Drupal::entityQuery('taxonomy_term')
       ->condition('vid', $taxonomy_name);
     $tids = $query->execute();
 
-    $entity_manager = \Drupal::entityManager();
+    $entity_manager = \Drupal::entityTypeManager();
     $term_storage = $entity_manager->getStorage('taxonomy_term');
     $taxonomy_terms = $term_storage->loadMultiple($tids);
 
@@ -430,14 +430,14 @@ class TwigExtension extends AbstractExtension {
   /**
    * Returns active theme name.
    */
-  public function get_active_theme(\Twig_Environment $env, array $context) {
+  public function get_active_theme(\Twig\Environment $env, array $context) {
     return \Drupal::theme()->getActiveTheme()->getName();
   }
 
   /**
    * Returns image path, optionally for a specific image size.
    */
-  public function get_image_path(\Twig_Environment $env, array $context, $image, $style = FALSE) {
+  public function get_image_path(\Twig\Environment $env, array $context, $image, $style = FALSE) {
 
     // Check if $image is present.
     if (is_null($image)) {
