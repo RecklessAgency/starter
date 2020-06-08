@@ -409,10 +409,19 @@ class TwigExtension extends AbstractExtension {
 
     $i = 0;
     foreach ($taxonomy_terms as $term) {
-      $taxonomy_array[$i] = [
+      $values = [
         'tid' => $term->hasTranslation($this->get_current_lang()) ? $term->getTranslation($this->get_current_lang())->get('tid')->value : $term->getTranslation('en')->get('tid')->value,
         'name' => $term->hasTranslation($this->get_current_lang()) ? $term->getTranslation($this->get_current_lang())->get('name')->value : $term->getTranslation('en')->get('name')->value,
+        'parent' => $term->hasTranslation($this->get_current_lang()) ? $term->getTranslation($this->get_current_lang())->get('parent')->target_id : $term->getTranslation('en')->get('parent')->target_id,
+        'children' => [],
       ];
+
+      if ($values['parent'] === "0") {
+        $taxonomy_array[$values['tid']] = $values;
+      }
+      else {
+        $taxonomy_array[$values['parent']]['children'][$values['tid']] = $values;
+      }
 
       // Add extra fields if supplied.
       if (!is_null($other_fields)) {
