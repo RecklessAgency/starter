@@ -407,13 +407,14 @@ class TwigExtension extends AbstractExtension {
 
     $taxonomy_array = [];
 
-    $i = 0;
     foreach ($taxonomy_terms as $term) {
+      $tid = $term->hasTranslation($this->get_current_lang()) ? $term->getTranslation($this->get_current_lang())->get('tid')[0]->value : $term->getTranslation('en')->get('tid')[0]->value;
+
       $values = [
-        'tid' => $term->hasTranslation($this->get_current_lang()) ? $term->getTranslation($this->get_current_lang())->get('tid')->value : $term->getTranslation('en')->get('tid')->value,
-        'name' => $term->hasTranslation($this->get_current_lang()) ? $term->getTranslation($this->get_current_lang())->get('name')->value : $term->getTranslation('en')->get('name')->value,
+        'tid' => $tid,
+        'name' => $term->hasTranslation($this->get_current_lang()) ? $term->getTranslation($this->get_current_lang())->get('name')[0]->value : $term->getTranslation('en')->get('name')[0]->value,
         'parent' => $term->hasTranslation($this->get_current_lang()) ? $term->getTranslation($this->get_current_lang())->get('parent')->target_id : $term->getTranslation('en')->get('parent')->target_id,
-        'children' => [],
+        'children' => isset($taxonomy_array[$tid]) ? $taxonomy_array[$tid]['children'] : [],
       ];
 
       if ($values['parent'] === "0") {
@@ -426,12 +427,15 @@ class TwigExtension extends AbstractExtension {
       // Add extra fields if supplied.
       if (!is_null($other_fields)) {
         foreach ($other_fields as $field) {
-          $taxonomy_array[$i][$field] = $term->get($field)->value;
+          $taxonomy_array[$i][$field] = $term->get($field)[0]->value;
         }
       }
 
       $i++;
     }
+
+    dump($taxonomy_array);
+    exit;
 
     return $taxonomy_array;
   }
