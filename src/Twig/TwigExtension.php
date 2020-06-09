@@ -418,24 +418,24 @@ class TwigExtension extends AbstractExtension {
       ];
 
       if ($values['parent'] === "0") {
-        $taxonomy_array[$values['tid']] = $values;
+        $taxonomy_array[$tid] = $values;
       }
       else {
-        $taxonomy_array[$values['parent']]['children'][$values['tid']] = $values;
+        $taxonomy_array[$values['parent']]['children'][$tid] = $values;
       }
 
       // Add extra fields if supplied.
       if (!is_null($other_fields)) {
         foreach ($other_fields as $field) {
-          $taxonomy_array[$i][$field] = $term->get($field)[0]->value;
+          if ($values['parent'] === "0") {
+            $taxonomy_array[$tid][$field] = $term->get($field)[0]->value;
+          }
+          else {
+            $taxonomy_array[$values['parent']]['children'][$tid][$field] = $term->get($field)[0]->value;
+          }
         }
       }
-
-      $i++;
     }
-
-    dump($taxonomy_array);
-    exit;
 
     return $taxonomy_array;
   }
