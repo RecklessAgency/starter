@@ -488,7 +488,7 @@ class TwigExtension extends AbstractExtension {
     if (!empty($file)) {
       // Return original image file.
       if (!$style) {
-        return $file->url();
+        return $file->uri->url;
       }
       // Return specific image size.
       else {
