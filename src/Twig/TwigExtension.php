@@ -627,7 +627,7 @@ class TwigExtension extends AbstractExtension {
    * More efficient than kint(), and will exit script.
    */
   public function dd($data, $exit = TRUE) {
-    echo dump($data);
+    dump($data);
 
     if ($exit) {
       return exit;
