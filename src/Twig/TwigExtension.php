@@ -241,8 +241,10 @@ class TwigExtension extends AbstractExtension {
       $menu['#theme'] = $menu['#theme'] . '_' . $theme;
     }
 
+    $render_service = \Drupal::service('renderer');
+
     return [
-      '#markup' => drupal_render($menu),
+      '#markup' => $render_service->renderPlain($menu),
     ];
   }
 
