@@ -290,12 +290,17 @@ class TwigExtension extends AbstractExtension {
    * Place a node.
    */
   public function place_node(\Twig\Environment $env, array $context, $node_id, $node_view = 'full') {
-    $node = entity_load('node', $node_id);
+    $node = \Drupal::entityTypeManager()
+      ->getStorage('node')
+      ->load($node_id);
+
     if (empty($node)) {
       return '';
     }
     else {
-      return node_view($node, $node_view);
+      return \Drupal::entityTypeManager()
+        ->getViewBuilder('node')
+        ->view($node, $node_view);
     }
   }
 
