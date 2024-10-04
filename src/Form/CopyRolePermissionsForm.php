@@ -109,7 +109,7 @@ class CopyRolePermissionsForm extends FormBase {
       // Save role with granted permissions.
       $destination_role->save();
     }
-    drupal_set_message($this->t('Role "' . $values['source_role'] . '" successfully copied to "' . $values['destination_role'] . '"'));
+    $this->messenger()->addStatus($this->t('Role "' . $values['source_role'] . '" successfully copied to "' . $values['destination_role'] . '"'));
     return;
   }
 

@@ -26,7 +26,7 @@ class KernelResponseSubscriber implements EventSubscriberInterface {
   /**
    * The subscribed events.
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     return [
       KernelEvents::RESPONSE => 'onKernelResponse',
     ];

@@ -2,6 +2,7 @@
 
 namespace Drupal\starter\Twig;
 
+use Twig\Environment;
 use Drupal\entity_reference_revisions\Plugin\Field\FieldFormatter\EntityReferenceRevisionsEntityFormatter;
 use Drupal\block\Entity\Block;
 use Drupal\file\Entity\File;
@@ -39,132 +40,132 @@ class TwigExtension extends AbstractExtension {
    */
   public function getFunctions() {
     return [
-      new TwigFunction('base_root', [$this, 'base_root'], [
+      new TwigFunction('base_root', $this->base_root(...), [
         'is_safe' => ['html'],
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new TwigFunction('display_menu', [$this, 'place_menu'], [
+      new TwigFunction('display_menu', $this->place_menu(...), [
         'is_safe' => ['html'],
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
-      new TwigFunction('place_menu', [$this, 'place_menu'], [
+      new TwigFunction('place_menu', $this->place_menu(...), [
         'is_safe' => ['html'],
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
-      new TwigFunction('place_block', [$this, 'place_block'], [
+      new TwigFunction('place_block', $this->place_block(...), [
         'is_safe' => ['html'],
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
-      new TwigFunction('place_form', [$this, 'place_form'], [
+      new TwigFunction('place_form', $this->place_form(...), [
         'is_safe' => ['html'],
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
-      new TwigFunction('place_webform', [$this, 'place_webform'], [
+      new TwigFunction('place_webform', $this->place_webform(...), [
         'is_safe' => ['html'],
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new TwigFunction('place_node', [$this, 'place_node'], [
+      new TwigFunction('place_node', $this->place_node(...), [
         'is_safe' => ['html'],
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
-      new TwigFunction('place_term', [$this, 'place_term'], [
+      new TwigFunction('place_term', $this->place_term(...), [
         'is_safe' => ['html'],
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
-      new TwigFunction('place_view', [$this, 'place_view'], [
+      new TwigFunction('place_view', $this->place_view(...), [
         'is_safe' => ['html'],
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new TwigFunction('place_paragraphs', [$this, 'place_paragraphs'], [
+      new TwigFunction('place_paragraphs', $this->place_paragraphs(...), [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new TwigFunction('place_entity', [$this, 'place_entity'], [
+      new TwigFunction('place_entity', $this->place_entity(...), [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new TwigFunction('place_responsive_image', [$this, 'place_responsive_image'], [
+      new TwigFunction('place_responsive_image', $this->place_responsive_image(...), [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new TwigFunction('get_theme_url', [$this, 'get_theme_url'], [
+      new TwigFunction('get_theme_url', $this->get_theme_url(...), [
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
-      new TwigFunction('get_taxonomy_terms', [$this, 'get_taxonomy_terms'], [
+      new TwigFunction('get_taxonomy_terms', $this->get_taxonomy_terms(...), [
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
-      new TwigFunction('get_active_theme', [$this, 'get_active_theme'], [
+      new TwigFunction('get_active_theme', $this->get_active_theme(...), [
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
-      new TwigFunction('get_image_path', [$this, 'get_image_path'], [
+      new TwigFunction('get_image_path', $this->get_image_path(...), [
         'needs_environment' => TRUE,
         'needs_context' => TRUE,
       ]),
-      new TwigFunction('get_path_segment', [$this, 'get_path_segment'], [
+      new TwigFunction('get_path_segment', $this->get_path_segment(...), [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new TwigFunction('get_current_path', [$this, 'get_current_path'], [
+      new TwigFunction('get_current_path', $this->get_current_path(...), [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new TwigFunction('get_theme_setting', [$this, 'get_theme_setting'], [
+      new TwigFunction('get_theme_setting', $this->get_theme_setting(...), [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new TwigFunction('get_variable', [$this, 'get_variable'], [
+      new TwigFunction('get_variable', $this->get_variable(...), [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new TwigFunction('get_config', [$this, 'get_config'], [
+      new TwigFunction('get_config', $this->get_config(...), [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new TwigFunction('get_rendered_string', [$this, 'get_rendered_string'], [
+      new TwigFunction('get_rendered_string', $this->get_rendered_string(...), [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new TwigFunction('dd', [$this, 'dd'], [
+      new TwigFunction('dd', $this->dd(...), [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new TwigFunction('get_first_instance', [$this, 'get_first_instance'], [
+      new TwigFunction('get_first_instance', $this->get_first_instance(...), [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new TwigFunction('safe_merge', [$this, 'safe_merge'], [
+      new TwigFunction('safe_merge', $this->safe_merge(...), [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new TwigFunction('get_node', [$this, 'get_node'], [
+      new TwigFunction('get_node', $this->get_node(...), [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new TwigFunction('set_meta', [$this, 'set_meta'], [
+      new TwigFunction('set_meta', $this->set_meta(...), [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new TwigFunction('get_root', [$this, 'get_root'], [
+      new TwigFunction('get_root', $this->get_root(...), [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new TwigFunction('get_node_path', [$this, 'get_node_path'], [
+      new TwigFunction('get_node_path', $this->get_node_path(...), [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
-      new TwigFunction('get_current_lang', [$this, 'get_current_lang'], [
+      new TwigFunction('get_current_lang', $this->get_current_lang(...), [
         'needs_environment' => FALSE,
         'needs_context' => FALSE,
       ]),
@@ -204,7 +205,7 @@ class TwigExtension extends AbstractExtension {
    * @param array $context
    *   An array of parameters passed to the template.
    */
-  public function place_menu(\Twig\Environment $env, array $context, $menu_name, $min_depth = NULL, $max_depth = NULL, $theme = NULL) {
+  public function place_menu(Environment $env, array $context, $menu_name, $min_depth = NULL, $max_depth = NULL, $theme = NULL) {
     $menu_tree = \Drupal::menuTree();
 
     // Build the typical default set of menu tree parameters.
@@ -256,7 +257,7 @@ class TwigExtension extends AbstractExtension {
    * @param array $context
    *   An array of parameters passed to the template.
    */
-  public function place_block(\Twig\Environment $env, array $context, $block_name) {
+  public function place_block(Environment $env, array $context, $block_name) {
     $render = FALSE;
 
     // Get as entity block.
@@ -282,14 +283,14 @@ class TwigExtension extends AbstractExtension {
    * @param array $context
    *   An array of parameters passed to the template.
    */
-  public function place_form(\Twig\Environment $env, array $context, $form_name) {
+  public function place_form(Environment $env, array $context, $form_name) {
     return \Drupal::formBuilder()->getForm($form_name);
   }
 
   /**
    * Place a node.
    */
-  public function place_node(\Twig\Environment $env, array $context, $node_id, $node_view = 'full') {
+  public function place_node(Environment $env, array $context, $node_id, $node_view = 'full') {
     $node = \Drupal::entityTypeManager()
       ->getStorage('node')
       ->load($node_id);
@@ -307,12 +308,12 @@ class TwigExtension extends AbstractExtension {
   /**
    * Place a taxonomy term.
    */
-  public function place_term(\Twig\Environment $env, array $context, $term, $term_view = 'full') {
+  public function place_term(Environment $env, array $context, $term, $term_view = 'full') {
     if (empty($term)) {
       return '';
     }
     else {
-      return entity_view($term, $term_view);
+      return \Drupal::entityTypeManager()->getViewBuilder($term->getEntityTypeId())->view($term, $term_view);
     }
   }
 
@@ -403,7 +404,7 @@ class TwigExtension extends AbstractExtension {
   /**
    * Returns an array of taxonomy term names and IDs from a taxonomy vocabulary name.
    */
-  public function get_taxonomy_terms(\Twig\Environment $env, array $context, $taxonomy_name, array $other_fields = NULL) {
+  public function get_taxonomy_terms(Environment $env, array $context, $taxonomy_name, array $other_fields = NULL) {
     $query = \Drupal::entityQuery('taxonomy_term')
       ->condition('vid', $taxonomy_name);
     $tids = $query->execute();
@@ -450,14 +451,14 @@ class TwigExtension extends AbstractExtension {
   /**
    * Returns active theme name.
    */
-  public function get_active_theme(\Twig\Environment $env, array $context) {
+  public function get_active_theme(Environment $env, array $context) {
     return \Drupal::theme()->getActiveTheme()->getName();
   }
 
   /**
    * Returns image path, optionally for a specific image size.
    */
-  public function get_image_path(\Twig\Environment $env, array $context, $image, $style = FALSE) {
+  public function get_image_path(Environment $env, array $context, $image, $style = FALSE) {
 
     // Check if $image is present.
     if (is_null($image)) {
@@ -624,10 +625,10 @@ class TwigExtension extends AbstractExtension {
    */
   public function place_entity($entity, $view_mode = 'full') {
     // View is the render array.
-    $view = entity_view($entity, $view_mode);
+    $view = \Drupal::entityTypeManager()->getViewBuilder($entity->getEntityTypeId())->view($entity, $view_mode);
 
     // Render is the html output.
-    return render($view);
+    return \Drupal::service('renderer')->render($view);
   }
 
   /**
