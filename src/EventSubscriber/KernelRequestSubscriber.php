@@ -41,8 +41,8 @@ class KernelRequestSubscriber implements EventSubscriberInterface {
 
     $anonymous = \Drupal::currentUser()->isAnonymous();
 
-    // Target anonymous users and master request (important)
-    if ($anonymous === TRUE && $event->isMasterRequest()) {
+    // Target anonymous users and main request (important)
+    if ($anonymous === TRUE && $event->isMainRequest()) {
       $current_path = \Drupal::service('path.current')->getPath();
       $alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
       $alias_parts = explode('/', trim($alias, '/'));
