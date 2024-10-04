@@ -2,4 +2,4 @@ type: module
 name: Starter
 description: 'Starter module providing miscellaneous useful functionality.'
 package: Other
-core_version_requirement: 9.x
+core_version_requirement: ^10 || ^11

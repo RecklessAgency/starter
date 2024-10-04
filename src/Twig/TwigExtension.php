@@ -406,7 +406,8 @@ class TwigExtension extends AbstractExtension {
    */
   public function get_taxonomy_terms(Environment $env, array $context, $taxonomy_name, array $other_fields = NULL) {
     $query = \Drupal::entityQuery('taxonomy_term')
-      ->condition('vid', $taxonomy_name);
+      ->condition('vid', $taxonomy_name)
+      ->accessCheck(TRUE);
     $tids = $query->execute();
 
     $entity_manager = \Drupal::entityTypeManager();
